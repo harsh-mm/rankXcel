@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RankXCL | Local SEO Agency Serving Manhattan Beach Businesses</title>
+<meta name="description" content="RankXCL helps Manhattan Beach businesses improve Google Maps visibility, local pack rankings, Google Business Profile performance, service-area relevance, and conversion-focused local SEO to generate tracked calls and qualified inquiries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f2ede4;
+  --cream2: #ebe4d8;
+  --cream3: #e2d9c9;
+  --ink: #1a1710;
+  --ink2: #4a4640;
+  --ink3: #7a7570;
+  --orange: #c9501a;
+  --orange2: rgba(201,80,26,0.12);
+  --border: rgba(26,23,16,0.12);
+  --border2: rgba(26,23,16,0.18);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%,-50%);
+  transition: width .15s, height .15s;
+}
+#cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(201,80,26,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+
+/* CANVAS */
+#fx-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 500;
+}
+
+/* WORD PHYSICS */
+.word-unit {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(242,237,228,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 0.75px solid var(--border);
+  padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 20px; font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -.5px;
+}
+.nav-logo em { font-style: italic; font-weight: 400; color: var(--orange); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink2); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--cream);
+  background: var(--ink);
+  border: none; cursor: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--orange); }
+
+/* TICKER */
+.ticker {
+  background: var(--ink);
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 32s linear infinite;
+}
+.ticker-inner span {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .06em;
+  color: rgba(242,237,228,0.75);
+  text-transform: uppercase;
+  margin: 0 3rem;
+}
+.ticker-inner span b { color: var(--orange); font-weight: 500; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* HERO */
+.hero {
+  padding: 7rem 3rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: start;
+  border-bottom: 0.75px solid var(--border);
+  position: relative;
+}
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.hero-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--orange); }
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--orange);
+}
+.hero-body {
+  font-size: 17px; line-height: 1.75;
+  color: var(--ink2);
+  max-width: 520px;
+  margin-bottom: 3rem;
+}
+.hero-body strong { color: var(--ink); font-weight: 600; }
+.hero-ctas { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  border: none; cursor: none;
+  padding: 16px 28px;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: .6rem;
+  transition: background .2s;
+}
+.btn-primary:hover { background: var(--orange); }
+.btn-primary::after { content: '↗'; font-size: 14px; }
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.btn-ghost:hover { color: var(--orange); border-color: var(--orange); }
+
+/* STATS ROW */
+.stats-row {
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 0.75px solid var(--border);
+  display: flex; gap: 3rem;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: .4rem;
+}
+.stat-val {
+  font-family: var(--font-serif);
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--ink);
+}
+.stat-val em { font-style: italic; font-weight: 400; color: var(--orange); }
+
+/* AUDIT CARD */
+.audit-card {
+  background: var(--ink);
+  padding: 2.5rem;
+  position: sticky;
+  top: 88px;
+}
+.audit-card-title {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.75rem;
+}
+.audit-item {
+  display: flex; align-items: flex-start; gap: .75rem;
+  padding: .7rem 0;
+  border-bottom: 0.5px solid rgba(242,237,228,0.08);
+  font-family: var(--font-sans);
+  font-size: 13.5px; color: rgba(242,237,228,0.85);
+  line-height: 1.4;
+}
+.audit-item:last-of-type { border-bottom: none; }
+.audit-item::before { content: '–'; color: var(--orange); flex-shrink: 0; font-family: var(--font-mono); }
+.audit-cta {
+  margin-top: 2rem;
+  background: var(--orange);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  border: none; cursor: none;
+  padding: 14px 22px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  transition: opacity .2s;
+}
+.audit-cta:hover { opacity: .88; }
+.audit-note {
+  font-family: var(--font-mono);
+  font-size: 10px; color: rgba(242,237,228,0.55);
+  letter-spacing: .04em;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* SECTIONS */
+section { padding: 6rem 3rem; border-bottom: 0.75px solid var(--border); }
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: #7a7570;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.section-title em { font-style: italic; font-weight: 400; color: var(--orange); }
+
+/* PROBLEM SECTION */
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; }
+.problem-body { font-size: 17px; line-height: 1.75; color: var(--ink2); }
+.problem-body strong { color: var(--ink); font-weight: 600; }
+.problem-body p + p { margin-top: 1.25rem; }
+.fail-list { margin-top: 2.5rem; list-style: none; display: flex; flex-direction: column; gap: 0; }
+.fail-list li {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: .85rem 0;
+  border-bottom: 0.75px solid var(--border);
+  font-size: 14px; color: var(--ink2);
+  line-height: 1.5;
+}
+.fail-list li:first-child { border-top: 0.75px solid var(--border); }
+.fail-x { color: var(--orange); font-family: var(--font-mono); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.approach-block {
+  background: var(--cream2);
+  border-left: 3px solid var(--orange);
+  padding: 2rem;
+  margin-top: 2.5rem;
+}
+.approach-block p { font-size: 14px; color: var(--ink2); margin-bottom: 1rem; }
+.approach-block ul { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+.approach-block li {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--ink2);
+  padding: .3rem 0;
+  display: flex; gap: .6rem;
+}
+.approach-block li::before { content: '→'; color: var(--orange); flex-shrink: 0; }
+
+/* APPROACH CARDS */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 4rem;
+  border: 0.75px solid var(--border);
+}
+.approach-card {
+  padding: 2.25rem 2rem;
+  border-right: 0.75px solid var(--border);
+  transition: background .2s;
+}
+.approach-card:nth-child(3n) { border-right: none; }
+.approach-card:nth-child(n+4) { border-top: 0.75px solid var(--border); }
+.approach-card:hover { background: var(--cream2); }
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em; color: var(--orange);
+  margin-bottom: 1.25rem;
+}
+.approach-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--ink); margin-bottom: .75rem;
+  line-height: 1.2;
+}
+.approach-card p { font-size: 13.5px; color: var(--ink2); line-height: 1.65; }
+
+/* DIFF TABLE */
+.diff-wrap { margin-top: 4rem; }
+.diff-head {
+  display: grid; grid-template-columns: 1.2fr 1fr 1.2fr;
+  padding: .75rem 1.5rem;
+  background: var(--cream2);
+  border: 0.75px solid var(--border);
+  border-bottom: none;
+}
+.diff-head span {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink3);
+}
+.diff-head span:last-child { color: var(--orange); }
+.diff-row {
+  display: grid; grid-template-columns: 1.2fr 1fr 1.2fr;
+  padding: 1.1rem 1.5rem;
+  border: 0.75px solid var(--border);
+  border-top: none;
+  transition: background .15s;
+}
+.diff-row:hover { background: var(--cream2); }
+.diff-row span { font-size: 13.5px; line-height: 1.5; }
+.diff-row span:nth-child(1) { color: var(--ink3); font-style: italic; font-family: var(--font-sans); }
+.diff-row span:nth-child(2) { font-family: var(--font-mono); font-size: 12px; color: #9a9590; text-decoration: line-through; }
+.diff-row span:nth-child(3) { color: var(--ink); font-weight: 500; }
+
+/* HOW IT WORKS */
+.how-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; margin-top: 4rem;
+}
+.how-step {
+  padding: 2.5rem 2rem 2rem;
+  border-right: 0.75px solid var(--border);
+  border-top: 0.75px solid var(--border);
+  position: relative;
+}
+.how-step:nth-child(3n) { border-right: none; }
+.how-step:nth-child(-n+3) { border-top: none; }
+.how-num {
+  font-family: var(--font-serif);
+  font-size: 3.5rem; font-weight: 700;
+  color: var(--orange);
+  opacity: .18;
+  line-height: 1;
+  margin-bottom: .75rem;
+}
+.how-step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--ink); margin-bottom: .6rem;
+}
+.how-step p { font-size: 13.5px; color: var(--ink2); line-height: 1.65; }
+
+/* WHO */
+.who-body {
+  font-size: 18px; line-height: 1.75;
+  color: var(--ink2); max-width: 680px;
+  margin-top: 1.5rem;
+}
+.who-body strong { color: var(--ink); font-weight: 600; }
+.verticals { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2.5rem; }
+.vertical {
+  border: 0.75px solid var(--border2);
+  font-size: 13px; color: var(--ink2);
+  padding: .6rem 1.25rem;
+  font-family: var(--font-sans);
+  transition: border-color .2s, color .2s, background .2s;
+  cursor: default;
+}
+.vertical:hover { border-color: var(--orange); color: var(--orange); background: var(--orange2); }
+
+/* PROCESS */
+.process-list { margin-top: 4rem; }
+.process-item {
+  display: grid; grid-template-columns: 5rem 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-top: 0.75px solid var(--border);
+  align-items: start;
+}
+.process-item:last-child { border-bottom: 0.75px solid var(--border); }
+.process-n {
+  font-family: var(--font-serif);
+  font-size: 2.5rem; font-weight: 700;
+  color: var(--orange); opacity: .3;
+  line-height: 1;
+  padding-top: .15rem;
+}
+.process-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--ink); margin-bottom: .4rem;
+}
+.process-item p { font-size: 14px; color: var(--ink2); line-height: 1.7; }
+
+/* MARKETS */
+.market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+.cities { display: flex; flex-wrap: wrap; gap: .4rem; }
+.city {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: .04em;
+  border: 0.75px solid var(--border2);
+  color: var(--ink2);
+  padding: .5rem 1rem;
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.city.primary { border-color: var(--orange); color: var(--orange); background: var(--orange2); }
+.city::before { content: '◉'; font-size: 7px; }
+.market-copy p { font-size: 15px; color: var(--ink2); line-height: 1.75; margin-bottom: 1rem; }
+.market-copy p:last-child { font-size: 13px; color: var(--ink3); font-style: italic; }
+
+/* FAQ */
+.faq { margin-top: 4rem; }
+.faq-item { border-top: 0.75px solid var(--border); }
+.faq-item:last-child { border-bottom: 0.75px solid var(--border); }
+.faq-q {
+  width: 100%; text-align: left;
+  background: none; border: none; cursor: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 0;
+  font-family: var(--font-serif);
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--ink);
+  gap: 1rem;
+}
+.faq-icon {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border: 0.75px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--orange);
+  font-family: var(--font-mono);
+  transition: transform .2s;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  font-size: 14.5px; color: var(--ink2); line-height: 1.75;
+  padding-bottom: 1.4rem;
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* FINAL CTA */
+.final-cta {
+  padding: 8rem 3rem;
+  text-align: center;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: 'RankXCL';
+  font-family: var(--font-serif);
+  font-size: 28vw; font-weight: 700; font-style: italic;
+  color: rgba(242,237,228,0.03);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1;
+}
+.final-cta h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  max-width: 680px;
+  margin: 0 auto 1.25rem;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  position: relative;
+}
+.final-cta h2 em { font-style: italic; font-weight: 400; color: var(--orange); }
+.final-cta p {
+  font-size: 16px; color: rgba(242,237,228,0.75);
+  max-width: 520px; margin: 0 auto 3rem;
+  position: relative;
+}
+.final-btns { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; position: relative; }
+.btn-primary-light {
+  background: var(--orange);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  border: none; cursor: none;
+  padding: 16px 32px;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: .6rem;
+  transition: opacity .2s;
+}
+.btn-primary-light::after { content: '↗'; }
+.btn-primary-light:hover { opacity: .88; }
+.btn-ghost-light {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(242,237,228,0.75);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242,237,228,0.2);
+  padding-bottom: 2px;
+  transition: color .2s;
+  display: flex; align-items: center;
+}
+.btn-ghost-light:hover { color: var(--orange); }
+.contact-row {
+  margin-top: 3rem;
+  font-family: var(--font-mono);
+  font-size: 11px; color: rgba(242,237,228,0.55);
+  letter-spacing: .06em;
+  display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+  position: relative;
+}
+.contact-row a { color: rgba(242,237,228,0.55); text-decoration: none; transition: color .2s; }
+.contact-row a:hover { color: var(--orange); }
+
+/* FOOTER */
+footer {
+  padding: 2rem 3rem;
+  background: var(--ink);
+  border-top: 0.75px solid rgba(242,237,228,0.08);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 16px; font-weight: 700;
+  color: rgba(242,237,228,0.75);
+  text-decoration: none;
+}
+.footer-logo em { font-style: italic; font-weight: 400; color: var(--orange); }
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 10px; color: rgba(242,237,228,0.5);
+  letter-spacing: .04em; text-align: right;
+}
+
+/* MAGIC WORDS */
+.magic-word { cursor: none; }
+
+/* TOOLTIP */
+.fx-tip {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .08em;
+  color: var(--orange);
+  pointer-events: none;
+  z-index: 600;
+  opacity: 0;
+  transition: opacity .15s;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.hero > * { animation: fadeUp .5s ease both; }
+.hero-tag { animation-delay:.05s; }
+.hero h1 { animation-delay:.12s; }
+.hero-body { animation-delay:.2s; }
+.hero-ctas { animation-delay:.28s; }
+.stats-row { animation-delay:.35s; }
+.audit-card { animation: fadeUp .5s ease .2s both; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; gap: 3rem; }
+  .audit-card { position: static; }
+  section { padding: 4rem 1.5rem; }
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .problem-grid, .market-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .approach-card { border-right: none; border-bottom: 0.75px solid var(--border); }
+  .how-grid { grid-template-columns: 1fr; }
+  .how-step { border-right: none; }
+  .diff-head, .diff-row { grid-template-columns: 1fr; }
+  .diff-head span:nth-child(1), .diff-head span:nth-child(2),
+  .diff-row span:nth-child(1), .diff-row span:nth-child(2) { display: none; }
+  footer { padding: 1.5rem; }
+  .final-cta { padding: 5rem 1.5rem; }
+  .stats-row { flex-wrap: wrap; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="fx-canvas"></canvas>
+<div class="fx-tip" id="fx-tip"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" style="display:inline-flex;align-items:center;text-decoration:none;">
+  <svg width="220" height="44" viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+    <rect width="220" height="44" fill="#111"/>
+    <text x="10" y="33" font-family="'Arial Black','Impact','Arial Narrow',sans-serif" font-size="28" font-weight="900" fill="#f0ede8" letter-spacing="2">RANK</text>
+    <line x1="112" y1="3" x2="122" y2="41" stroke="#c9501a" stroke-width="3.5" stroke-linecap="butt"/>
+    <text x="126" y="33" font-family="'Arial Black','Impact','Arial Narrow',sans-serif" font-size="28" font-weight="900" fill="#c9501a" letter-spacing="2">XCL</text>
+    <line x1="10" y1="40" x2="210" y2="40" stroke="#c9501a" stroke-width="1.2"/>
+  </svg>
+</a>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#audit" class="nav-cta">Free Audit</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span><b>15 Years</b> Digital Marketing Experience</span>
+    <span>Google Business Profile Optimization</span>
+    <span>Google Maps SEO & Local Pack Rankings</span>
+    <span>Entity Alignment · Website & GBP</span>
+    <span><b>Manhattan Beach</b> & South Bay Focus</span>
+    <span>Call Tracking · Form Tracking · Ranking Reports</span>
+    <span>Service-Area Relevance & Location-Page Strategy</span>
+    <span><b>15 Years</b> Digital Marketing Experience</span>
+    <span>Google Business Profile Optimization</span>
+    <span>Google Maps SEO & Local Pack Rankings</span>
+    <span>Entity Alignment · Website & GBP</span>
+    <span><b>Manhattan Beach</b> & South Bay Focus</span>
+    <span>Call Tracking · Form Tracking · Ranking Reports</span>
+    <span>Service-Area Relevance & Location-Page Strategy</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="audit">
+  <div>
+    <div style="margin-bottom:2rem;">
+      <svg width="480" height="90" viewBox="0 0 480 90" xmlns="http://www.w3.org/2000/svg">
+  <rect width="480" height="90" fill="#111"/>
+  <text x="16" y="62" font-family="'Arial Black','Impact','Arial Narrow',sans-serif" font-size="54" font-weight="900" fill="#f0ede8" letter-spacing="4">RANK</text>
+  <line x1="234" y1="6" x2="252" y2="84" stroke="#c9501a" stroke-width="6" stroke-linecap="butt"/>
+  <text x="258" y="62" font-family="'Arial Black','Impact','Arial Narrow',sans-serif" font-size="54" font-weight="900" fill="#c9501a" letter-spacing="4">XCL</text>
+  <line x1="16" y1="76" x2="464" y2="76" stroke="#c9501a" stroke-width="1.8"/>
+  <text x="16" y="86" font-family="'DM Mono',monospace" font-size="9" fill="#c9501a" fill-opacity="0.65" letter-spacing="4">LOCAL SEO  ·  MANHATTAN BEACH</text>
+</svg>
+    </div>
+    <div class="hero-tag">Manhattan Beach Local SEO</div>
+    <h1>Local SEO that generates <em>qualified leads,</em> not just rankings.</h1>
+    <p class="hero-body">RankXCL generates <span class="magic-word" data-fx="calls">qualified calls</span>, form <span class="magic-word" data-fx="leads">leads</span>, and measurable local <span class="magic-word" data-fx="revenue">revenue</span> for Manhattan Beach businesses - full-funnel local SEO built around Google Maps <span class="magic-word" data-fx="visibility">visibility</span>, GBP optimization, entity <span class="magic-word" data-fx="alignment">alignment</span>, and <span class="magic-word" data-fx="tracking">tracked</span> lead flow.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Get my free audit</a>
+      <a href="tel:+13106837212" class="btn-ghost">Call (310) 683-7212</a>
+    </div>
+    <div class="stats-row">
+      <div>
+        <div class="stat-label">Experience</div>
+        <div class="stat-val">15 <em>years</em></div>
+      </div>
+      <div>
+        <div class="stat-label">Focus area</div>
+        <div class="stat-val">South <em>Bay</em></div>
+      </div>
+      <div>
+        <div class="stat-label">Work outsourced</div>
+        <div class="stat-val">0 <em>%</em></div>
+      </div>
+      <div>
+        <div class="stat-label">Based in</div>
+        <div class="stat-val">MB <em>CA</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="audit-card" id="audit-card">
+    <div class="audit-card-title">Free audit includes</div>
+    <div class="audit-item">Local <span class="magic-word" data-fx="rankings">rankings</span> review</div>
+    <div class="audit-item">Google Business Profile analysis</div>
+    <div class="audit-item">Google Maps <span class="magic-word" data-fx="visibility">visibility</span> assessment</div>
+    <div class="audit-item">Local pack performance</div>
+    <div class="audit-item">Service-area coverage gaps</div>
+    <div class="audit-item">Location-page structure</div>
+    <div class="audit-item">Conversion path review</div>
+    <div class="audit-item">Lead-generation gap report</div>
+    <a href="#" class="audit-cta">Get my free audit</a>
+    <div class="audit-note">No contract. No spam. Response within 24 hours.</div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+  <div class="section-tag">The problem</div>
+  <h2 class="section-title">Why most local SEO campaigns <em>underperform.</em></h2>
+  <div class="problem-grid">
+    <div>
+      <div class="problem-body">
+        <p><strong>RankXCL builds local SEO around the full path from search to contact.</strong> Most campaigns fail before they reach that path - built around isolated deliverables instead of full-funnel local search performance.</p>
+        <p>A provider updates title tags, adds city modifiers, cleans up a Business Profile, and reports <span class="magic-word" data-fx="rankings">ranking</span> movement. That can increase <span class="magic-word" data-fx="visibility">visibility</span> - but visibility alone does not create consistent <span class="magic-word" data-fx="leads">lead flow</span>, stronger <span class="magic-word" data-fx="conversion">conversion</span> rates, or measurable <span class="magic-word" data-fx="revenue">revenue</span> impact.</p>
+      </div>
+      <div class="approach-block">
+        <p>RankXCL's system covers the full acquisition path:</p>
+        <ul>
+          <li>Local <span class="magic-word" data-fx="rankings">rankings</span> & Google Maps visibility</li>
+          <li>GBP optimization & local pack performance</li>
+          <li>Service-area relevance & entity <span class="magic-word" data-fx="alignment">alignment</span></li>
+          <li>Location-page & service-page support</li>
+          <li>Page-level <span class="magic-word" data-fx="conversion">conversion</span> structure</li>
+          <li><span class="magic-word" data-fx="tracking">Tracked</span> calls and form inquiries</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;">Common failure points</p>
+      <ul class="fail-list">
+        <li><span class="fail-x">&#x2715;</span>Service area unclear - Google cannot map geographic relevance</li>
+        <li><span class="fail-x">&#x2715;</span>Location pages thin - no city-level entity depth</li>
+        <li><span class="fail-x">&#x2715;</span>Internal linking weak - <span class="magic-word" data-fx="rankings">ranking</span> signals do not flow</li>
+        <li><span class="fail-x">&#x2715;</span>GBP disconnected from website - entity signals conflict</li>
+        <li><span class="fail-x">&#x2715;</span>Entity consistency incomplete - knowledge graph confidence drops</li>
+        <li><span class="fail-x">&#x2715;</span><span class="magic-word" data-fx="traffic">Traffic</span> arrives but does not <span class="magic-word" data-fx="conversion">convert</span></li>
+        <li><span class="fail-x">&#x2715;</span>No call or form <span class="magic-word" data-fx="tracking">tracking</span> - campaign runs on incomplete data</li>
+      </ul>
+      <a href="#audit" class="btn-primary" style="display:inline-flex;margin-top:2.5rem;">Get my free audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="section-tag">Our approach</div>
+  <h2 class="section-title">A local acquisition system - <em>not a checklist.</em></h2>
+  <div class="cards-grid">
+    <div class="approach-card">
+      <div class="card-num">01 - Visibility</div>
+      <h3>We improve local <span class="magic-word" data-fx="visibility">visibility</span> where buying intent is highest</h3>
+      <p>Service-plus-city searches, Google Maps SEO, local pack <span class="magic-word" data-fx="rankings">rankings</span> - commercial-intent terms tied to calls, consultations, and quote requests.</p>
+    </div>
+    <div class="approach-card">
+      <div class="card-num">02 - Relevance</div>
+      <h3>We strengthen service-area relevance</h3>
+      <p>Service-area page strategy, location-page structure, internal linking, and geographic targeting signals so Google clearly connects you to the cities you serve.</p>
+    </div>
+    <div class="approach-card">
+      <div class="card-num">03 - Alignment</div>
+      <h3>We <span class="magic-word" data-fx="alignment">align</span> your Business Profile with your website</h3>
+      <p>GBP, website, service pages, and contact data reinforcing the same business identity, service categories, and geographic footprint.</p>
+    </div>
+    <div class="approach-card">
+      <div class="card-num">04 - Conversion</div>
+      <h3>We build pages to <span class="magic-word" data-fx="conversion">convert</span> visibility into inquiries</h3>
+      <p>Service pages, location pages, trust flow, CTA structure, and conversion pathways so more local <span class="magic-word" data-fx="traffic">traffic</span> becomes calls and form submissions.</p>
+    </div>
+    <div class="approach-card">
+      <div class="card-num">05 - Tracking</div>
+      <h3>We <span class="magic-word" data-fx="tracking">track</span> lead flow - not just rankings</h3>
+      <p><span class="magic-word" data-fx="rankings">Rankings</span>, Maps visibility, <span class="magic-word" data-fx="calls">calls</span>, forms, and landing-page conversion activity - all tied to measurable business outcomes.</p>
+    </div>
+    <div class="approach-card" style="background:var(--cream2);border-left:3px solid var(--orange);">
+      <div class="card-num" style="color:var(--orange);">The result</div>
+      <h3>SEO activity - local market <em>acquisition.</em></h3>
+      <p>That is the difference between running an SEO campaign and building a system that consistently turns search demand into qualified <span class="magic-word" data-fx="leads">leads</span>.</p>
+      <a href="#audit" class="btn-primary" style="display:inline-flex;margin-top:1.5rem;font-size:11px;padding:12px 20px;">Get my free audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section>
+  <div class="section-tag">What is different</div>
+  <h2 class="section-title">RankXCL optimizes for <em>acquisition,</em> not activity.</h2>
+  <div class="diff-wrap">
+    <div class="diff-head">
+      <span>Capability</span>
+      <span>Typical provider</span>
+      <span>RankXCL</span>
+    </div>
+    <div class="diff-row">
+      <span>Optimization focus</span>
+      <span>Visibility only</span>
+      <span>Visibility + entity strength + <span class="magic-word" data-fx="conversion">conversion</span> performance</span>
+    </div>
+    <div class="diff-row">
+      <span>Reporting</span>
+      <span>Rankings & traffic</span>
+      <span><span class="magic-word" data-fx="rankings">Rankings</span> + Maps + <span class="magic-word" data-fx="calls">calls</span> + forms + qualified inquiries</span>
+    </div>
+    <div class="diff-row">
+      <span>Location pages</span>
+      <span>Generic city content</span>
+      <span>Service-area relevance tied to lead quality</span>
+    </div>
+    <div class="diff-row">
+      <span>Google Business Profile</span>
+      <span>Side task</span>
+      <span>Core local search asset - map <span class="magic-word" data-fx="visibility">visibility</span>, trust, inbound flow</span>
+    </div>
+    <div class="diff-row">
+      <span>Campaign goal</span>
+      <span>SEO execution</span>
+      <span>Measurable local acquisition + <span class="magic-word" data-fx="revenue">revenue</span> contribution</span>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem;text-align:center;">
+    <a href="#" class="btn-primary">Talk about your market</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="process">
+  <div class="section-tag">How it works</div>
+  <h2 class="section-title">How RankXCL turns <span class="magic-word" data-fx="rankings">rankings</span> into <em>leads.</em></h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <h3>Search <span class="magic-word" data-fx="visibility">visibility</span> brings the click</h3>
+      <p>Your business appears for high-intent local searches when prospects are ready to act - service-plus-city terms, Google Maps results, and local pack placements.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <h3>Service-area relevance supports the <span class="magic-word" data-fx="rankings">ranking</span></h3>
+      <p>Google needs consistent signals about what you do, where you do it, and which markets you compete in.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <h3>Business Profile strengthens trust and map <span class="magic-word" data-fx="visibility">visibility</span></h3>
+      <p>A well-optimized GBP improves Maps visibility, local pack competitiveness, and click confidence at the moment of search.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <h3>Entity <span class="magic-word" data-fx="alignment">alignment</span> improves search stability</h3>
+      <p>When your business name, contact data, service pages, and Business Profile all support the same identity, local search performance becomes stronger and more defensible.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">05</div>
+      <h3>Page structure turns visits into action</h3>
+      <p>Visitors need a page that matches search intent, confirms local relevance, establishes credibility fast, and makes the next step obvious.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">06</div>
+      <h3><span class="magic-word" data-fx="tracking">Tracking</span> shows what is actually working</h3>
+      <p>Call tracking, form tracking, and landing-page measurement tie the campaign to real business outcomes - not assumptions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section>
+  <div class="section-tag">Who we work with</div>
+  <h2 class="section-title">Built for businesses that compete <em>locally.</em></h2>
+  <p class="who-body">RankXCL works best for businesses that understand <strong>rankings are useful - but qualified <span class="magic-word" data-fx="leads">leads</span>, trust, and <span class="magic-word" data-fx="conversion">conversion</span> performance are what actually matter.</strong></p>
+  <div class="verticals">
+    <div class="vertical">Home service companies in Manhattan Beach & the South Bay</div>
+    <div class="vertical">Contractors & trades in Hermosa Beach & Redondo Beach</div>
+    <div class="vertical">Law firms serving South Bay clients</div>
+    <div class="vertical">Medical & dental practices</div>
+    <div class="vertical">Wellness & beauty businesses</div>
+    <div class="vertical">Professional service firms</div>
+    <div class="vertical">Multi-location local brands</div>
+  </div>
+  <a href="#audit" class="btn-primary" style="display:inline-flex;margin-top:3rem;">Get my free audit</a>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="section-tag">Our process</div>
+  <h2 class="section-title">How our local SEO <em>process works.</em></h2>
+  <div class="process-list">
+    <div class="process-item">
+      <div class="process-n">01</div>
+      <div>
+        <h3>Audit the gaps</h3>
+        <p>We review local <span class="magic-word" data-fx="rankings">rankings</span>, Business Profile performance, Google Maps <span class="magic-word" data-fx="visibility">visibility</span>, local pack presence, service-area targeting, location-page coverage, entity <span class="magic-word" data-fx="alignment">alignment</span>, key landing pages, and <span class="magic-word" data-fx="conversion">conversion</span> gaps.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">02</div>
+      <div>
+        <h3>Define the local growth structure</h3>
+        <p>We identify the services, cities, neighborhoods, and search terms that need the strongest <span class="magic-word" data-fx="visibility">visibility</span>, the clearest geographic support, and the best conversion path.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">03</div>
+      <div>
+        <h3>Strengthen <span class="magic-word" data-fx="rankings">rankings</span> and relevance</h3>
+        <p>We improve the local SEO signals that affect Google Search visibility, Google Maps rankings, local pack performance, service-area relevance, and local entity clarity.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">04</div>
+      <div>
+        <h3>Improve the <span class="magic-word" data-fx="conversion">conversion</span> path</h3>
+        <p>We tighten messaging, trust flow, page structure, CTA placement, and inquiry flow so more local visitors become qualified <span class="magic-word" data-fx="leads">leads</span>.</p>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-n">05</div>
+      <div>
+        <h3><span class="magic-word" data-fx="tracking">Track</span> and refine</h3>
+        <p>We measure <span class="magic-word" data-fx="rankings">rankings</span>, <span class="magic-word" data-fx="calls">calls</span>, forms, local landing-page activity, and lead flow so the campaign improves based on outcomes - not assumptions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets">
+  <div class="section-tag">Service area</div>
+  <h2 class="section-title">Serving Manhattan Beach and nearby <em>South Bay markets.</em></h2>
+  <div class="market-grid">
+    <div class="cities">
+      <div class="city primary">Manhattan Beach</div>
+      <div class="city">Hermosa Beach</div>
+      <div class="city">Redondo Beach</div>
+      <div class="city">El Segundo</div>
+      <div class="city">Torrance</div>
+      <div class="city">Hawthorne</div>
+      <div class="city">Gardena</div>
+      <div class="city">Lawndale</div>
+    </div>
+    <div class="market-copy">
+      <p>RankXCL helps businesses from <strong>927 Manhattan Beach Blvd, Manhattan Beach, CA 90266</strong> improve local SEO performance and expand <span class="magic-word" data-fx="visibility">visibility</span> across nearby South Bay markets.</p>
+      <p>Local SEO performs best when service-area signals, location-page coverage, and business-location relevance are explicit, consistent, and market-specific. We build campaigns around defined service areas and city-level search opportunities.</p>
+      <p>Do not see your city? Call us at (310) 683-7212 - we may still be able to help.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-tag">Common questions</div>
+  <h2 class="section-title">Frequently asked <em>questions.</em></h2>
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What makes RankXCL different from other Manhattan Beach local SEO providers?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Most local SEO providers focus on rankings as the end result. RankXCL builds campaigns to improve Google Maps visibility, local pack performance, service-area relevance, entity alignment, and tracked lead generation - the full path from search to contact.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Why is Google Business Profile part of the strategy?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Google Business Profile is one of the most important local SEO assets a business has. It influences local pack visibility, Google Maps rankings, trust, relevance, click behavior, and how your business is interpreted in local search.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the difference between local SEO and Google Maps SEO?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Local SEO includes website optimization, service pages, location pages, internal linking, local relevance, and search visibility across Google Search. Google Maps SEO focuses more directly on GBP performance, map visibility, and local pack presence. Strong local campaigns require both.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do businesses need service-area pages to rank in nearby cities?<span class="faq-icon">+</span></button>
+      <div class="faq-a">In many cases, yes. Businesses often need well-structured service-area pages or location pages that clearly connect services to specific cities, neighborhoods, and local search intent.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Why do some local SEO campaigns fail even when rankings improve?<span class="faq-icon">+</span></button>
+      <div class="faq-a">They fail when rankings improve without enough gain in conversion performance, service-area relevance, page quality, Business Profile alignment, or lead tracking. Better rankings do not automatically create better business outcomes.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What do I get in the free audit?<span class="faq-icon">+</span></button>
+      <div class="faq-a">You get a review of your local rankings, Business Profile optimization, Google Maps visibility, service-area coverage, entity alignment, location-page structure, conversion path, and the main lead-generation gaps affecting performance.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I get started?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Start with the free audit. From there, RankXCL can identify where your Manhattan Beach local SEO campaign is underperforming and where the strongest near-term growth opportunities may be available. Call (310) 683-7212 or email hello@rankxcl.net.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>See why your Manhattan Beach local SEO is not producing enough <em>qualified leads.</em></h2>
+  <p>If your business is visible in local search but not generating enough calls, form submissions, or consultations - there is usually a structural reason. RankXCL identifies exactly where your system is underperforming.</p>
+  <div class="final-btns">
+    <a href="#" class="btn-primary-light">Get my free audit</a>
+    <a href="tel:+13106837212" class="btn-ghost-light">Call (310) 683-7212</a>
+  </div>
+  <div class="contact-row">
+    <a href="tel:+13106837212">(310) 683-7212</a>
+    <a href="mailto:hello@rankxcl.net">hello@rankxcl.net</a>
+    <span>927 Manhattan Beach Blvd, Manhattan Beach, CA 90266</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" style="display:inline-flex;align-items:center;text-decoration:none;">
+  <svg width="180" height="36" viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+    <rect width="180" height="36" fill="#111"/>
+    <text x="8" y="26" font-family="'Arial Black','Impact',sans-serif" font-size="22" font-weight="900" fill="#f0ede8" letter-spacing="2">RANK</text>
+    <line x1="90" y1="3" x2="98" y2="33" stroke="#c9501a" stroke-width="2.8" stroke-linecap="butt"/>
+    <text x="101" y="26" font-family="'Arial Black','Impact',sans-serif" font-size="22" font-weight="900" fill="#c9501a" letter-spacing="2">XCL</text>
+    <line x1="8" y1="32" x2="172" y2="32" stroke="#c9501a" stroke-width="1"/>
+  </svg>
+</a>
+  <div class="footer-right">
+    927 Manhattan Beach Blvd · Manhattan Beach, CA 90266<br>
+    (310) 683-7212 · hello@rankxcl.net · © 2025 RankXCL
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=-999,my=-999,rx=-999,ry=-999;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+
+const canvas=document.getElementById('fx-canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+const particles=[];
+const FX={
+  calls:{label:'CALL',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.strokeStyle='#c9501a';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,p.size+2,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#c9501a';ctx.font=`${p.size*1.8}px sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('☎',0,1);ctx.restore();}},
+  leads:{label:'LEAD',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=`rgba(201,80,26,${p.life*.9})`;const w=p.size*3,h=p.size*2;ctx.fillRect(-w/2,-h/2,w,h);ctx.strokeStyle='#f2ede4';ctx.lineWidth=.5;ctx.strokeRect(-w/2,-h/2,w,h);ctx.fillStyle='#f2ede4';ctx.fillRect(-w/2+2,-h/2+3,w-4,1);ctx.fillRect(-w/2+2,-h/2+6,w*.6,1);ctx.restore();}},
+  revenue:{label:'REVENUE',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.fillStyle=`rgba(201,80,26,${p.life})`;ctx.beginPath();ctx.arc(0,0,p.size+2,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(242,237,228,0.9)';ctx.font=`bold ${p.size+2}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('$',0,0);ctx.restore();}},
+  visibility:{label:'VISIBLE',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);for(let r=0;r<3;r++){const rad=(p.size+r*p.size*1.2)*(1+(1-p.life)*.5);ctx.strokeStyle=`rgba(201,80,26,${p.life*(.7-r*.2)})`;ctx.lineWidth=1;ctx.beginPath();ctx.arc(0,0,rad,-Math.PI*.8,Math.PI*.8);ctx.stroke();}ctx.fillStyle='#c9501a';ctx.beginPath();ctx.arc(0,0,p.size*.5,0,Math.PI*2);ctx.fill();ctx.restore();}},
+  alignment:{label:'ALIGN',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.rotate(p.rot);const r=p.size+2,t=6;ctx.strokeStyle='#c9501a';ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<t*2;i++){const a=(Math.PI*2*i)/(t*2),rad=i%2===0?r:r*.7;i===0?ctx.moveTo(Math.cos(a)*rad,Math.sin(a)*rad):ctx.lineTo(Math.cos(a)*rad,Math.sin(a)*rad);}ctx.closePath();ctx.stroke();ctx.beginPath();ctx.arc(0,0,r*.35,0,Math.PI*2);ctx.stroke();ctx.restore();}},
+  tracking:{label:'TRACK',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);const s=5;for(let i=0;i<s;i++){const t=i/s,px=(i-s/2)*p.size*1.2,py=-Math.sin(t*Math.PI+p.extra*2)*p.size*2;ctx.fillStyle=`rgba(201,80,26,${.4+t*.6})`;ctx.beginPath();ctx.arc(px,py,p.size*.5,0,Math.PI*2);ctx.fill();if(i<s-1){const px2=((i+1)-s/2)*p.size*1.2,py2=-Math.sin((i+1)/s*Math.PI+p.extra*2)*p.size*2;ctx.strokeStyle=`rgba(201,80,26,${p.life*.4})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px2,py2);ctx.stroke();}}ctx.restore();}},
+  conversion:{label:'CONVERT',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.rotate(p.rot*.2);ctx.strokeStyle='#c9501a';ctx.lineWidth=1.5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,p.size*2);ctx.lineTo(p.size*.6,p.size*1.4);ctx.lineTo(p.size,p.size*2.5);ctx.stroke();for(let i=0;i<6;i++){const a=Math.PI*2*i/6;ctx.strokeStyle=`rgba(201,80,26,${p.life*.5})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.cos(a)*p.size*.8,Math.sin(a)*p.size*.8);ctx.lineTo(Math.cos(a)*p.size*1.8,Math.sin(a)*p.size*1.8);ctx.stroke();}ctx.restore();}},
+  traffic:{label:'TRAFFIC',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.strokeStyle='#c9501a';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-p.size*1.5,p.size);ctx.lineTo(0,-p.size);ctx.lineTo(p.size*1.5,-p.size*2.5);ctx.stroke();ctx.fillStyle='#c9501a';ctx.beginPath();ctx.moveTo(p.size*1.5,-p.size*2.5);ctx.lineTo(p.size*.8,-p.size*1.5);ctx.lineTo(p.size*2.2,-p.size*1.8);ctx.closePath();ctx.fill();ctx.restore();}},
+  rankings:{label:'RANKING',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;const h=p.size*(1+p.extra*2),w=p.size*1.5;ctx.fillStyle=`rgba(201,80,26,${p.life})`;ctx.fillRect(p.x-w/2,p.y-h,w,h);ctx.fillStyle='#c9501a';ctx.font=`bold ${p.size+3}px monospace`;ctx.textAlign='center';ctx.fillText('▲',p.x,p.y-h-3);ctx.restore();}},
+  search:{label:'SEARCH',draw(ctx,p){ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.strokeStyle='#c9501a';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,p.size+1,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo((p.size+1)*.7,(p.size+1)*.7);ctx.lineTo((p.size+1)*1.5,(p.size+1)*1.5);ctx.stroke();ctx.restore();}}
+};
+
+function spawn(x,y,type,n){for(let i=0;i<n;i++){const a=(Math.PI*2*i/n)+Math.random()*.5,sp=1.5+Math.random()*3;particles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-Math.random()*2,life:1,decay:.012+Math.random()*.018,type,size:2+Math.random()*4,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.15,extra:Math.random()});}}
+
+const amb=[];
+function render(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(mx>0&&Math.random()<.25){amb.push({x:mx+(Math.random()-.5)*50,y:my+(Math.random()-.5)*50,vx:(Math.random()-.5)*.4,vy:-.3-Math.random()*.6,life:.5+Math.random()*.35,decay:.016+Math.random()*.02,size:1+Math.random()*2});}
+  for(let i=amb.length-1;i>=0;i--){const p=amb[i];p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;if(p.life<=0){amb.splice(i,1);continue;}ctx.save();ctx.globalAlpha=p.life*.35;ctx.fillStyle='#c9501a';ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();ctx.restore();}
+  for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.vx*=.98;p.rot+=p.rotV;p.life-=p.decay;if(p.life<=0){particles.splice(i,1);continue;}if(FX[p.type])FX[p.type].draw(ctx,p);}
+  requestAnimationFrame(render);
+}
+render();
+
+const tip=document.getElementById('fx-tip');
+const cds={};
+document.querySelectorAll('.magic-word').forEach(el=>{
+  const type=el.dataset.fx;
+  if(!FX[type])return;
+  el.style.color='#c9501a';
+  el.style.borderBottom='1px solid rgba(201,80,26,0.3)';
+  el.addEventListener('mouseenter',e=>{
+    tip.style.opacity='1';tip.textContent=FX[type].label;
+    const now=Date.now();if(cds[type]&&now-cds[type]<600)return;cds[type]=now;
+    const r=el.getBoundingClientRect();spawn(r.left+r.width/2,r.top+r.height/2,type,10+Math.floor(Math.random()*6));
+  });
+  el.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
+  el.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-18)+'px';});
+});
+
+// Word physics on hero h1
+function wrapWords(el){
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(node=>{
+    const words=node.textContent.split(/(\s+)/);
+    if(words.length<=1)return;
+    const frag=document.createDocumentFragment();
+    words.forEach(w=>{if(/^\s+$/.test(w)){frag.appendChild(document.createTextNode(w));}else{const s=document.createElement('span');s.className='word-unit';s.textContent=w;frag.appendChild(s);}});
+    node.parentNode.replaceChild(frag,node);
+  });
+}
+const heroH1=document.querySelector('.hero h1');
+if(heroH1)wrapWords(heroH1);
+const wus=[];
+document.querySelectorAll('.hero h1 .word-unit').forEach(el=>wus.push({el,cx:0,cy:0,vx:0,vy:0}));
+(function phys(){
+  wus.forEach(w=>{
+    const r=w.el.getBoundingClientRect(),ex=r.left+r.width/2,ey=r.top+r.height/2;
+    const dx=ex-mx,dy=ey-my,dist=Math.sqrt(dx*dx+dy*dy);
+    let fx=0,fy=0;
+    if(dist<100&&dist>0){const f=(100-dist)/100;fx=(dx/dist)*f*f*2000*.001;fy=(dy/dist)*f*f*2000*.001;}
+    fx+=(-w.cx)*.12;fy+=(-w.cy)*.12;
+    w.vx=(w.vx+fx)*.72;w.vy=(w.vy+fy)*.72;
+    w.cx+=w.vx;w.cy+=w.vy;
+    const mag=Math.sqrt(w.cx*w.cx+w.cy*w.cy);
+    if(mag>60){w.cx=w.cx/mag*60;w.cy=w.cy/mag*60;}
+    w.el.style.transform=`translate(${w.cx.toFixed(2)}px,${w.cy.toFixed(2)}px)`;
+  });
+  requestAnimationFrame(phys);
+})();
+
+let lmx=0,lmy=0;
+document.addEventListener('mousemove',e=>{
+  const dx=e.clientX-lmx,dy=e.clientY-lmy,sp=Math.sqrt(dx*dx+dy*dy);
+  if(sp>18&&Math.random()<.35){const types=Object.keys(FX);spawn(e.clientX,e.clientY,types[Math.floor(Math.random()*types.length)],2);}
+  lmx=e.clientX;lmy=e.clientY;
+});
+
+function toggleFaq(btn){const item=btn.closest('.faq-item');const open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));if(!open)item.classList.add('open');}
+</script>
+</body>
+</html>
